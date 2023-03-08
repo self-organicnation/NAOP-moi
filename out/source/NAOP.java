@@ -1245,7 +1245,9 @@ for (int i = 0; i < networkSize; i++) {
   {   
    if ( key =='a'||  key =='b' ||  key =='c' ||  key =='d' || key =='e' || key =='f' || key =='s' || key =='z' || key =='J'  ) // 
   {
+    if (formerKeyCode == BACKSPACE) {
     modeStartKey = key;   // press l to change formerKeyMetro Mode
+    }
    }
        
   switch( modeStartKey) {
@@ -15415,7 +15417,7 @@ float[] volumei;
       }
     } 
     
-       if (formerKeyMetro == 'B' ) { //drive ball with lfo
+       if (formerKeyMetro == 'B' ) { //mode signal
      fill( 255, 255, 0 ); // Spheres are all modulated with the same color. depending of acceleration
    //   followLFO();  // better to repare
    //  followLFObis(); // same as below

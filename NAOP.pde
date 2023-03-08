@@ -1217,7 +1217,9 @@ for (int i = 0; i < networkSize; i++) {
   {   
    if ( key =='a'||  key =='b' ||  key =='c' ||  key =='d' || key =='e' || key =='f' || key =='s' || key =='z' || key =='J'  ) // 
   {
+    if (formerKeyCode == BACKSPACE) {
     modeStartKey = key;   // press l to change formerKeyMetro Mode
+    }
    }
        
   switch( modeStartKey) {

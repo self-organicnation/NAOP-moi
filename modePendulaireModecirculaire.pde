@@ -306,7 +306,7 @@ void  modePendulaireModeCirculaire() {
       }
     } 
     
-       if (formerKeyMetro == 'B' ) { //drive ball with lfo
+       if (formerKeyMetro == 'B' ) { //mode signal
      fill( 255, 255, 0 ); // Spheres are all modulated with the same color. depending of acceleration
    //   followLFO();  // better to repare
    //  followLFObis(); // same as below
