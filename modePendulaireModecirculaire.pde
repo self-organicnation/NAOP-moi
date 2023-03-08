@@ -289,6 +289,7 @@ void  modePendulaireModeCirculaire() {
                          if (keyMode != " addSignalOneAndTwoBis " ) {
                              if (keyMode != " addSignalOneAndTwoTer " ) {
                                if (keyMode != " followDistribueAddLfoPattern " ) {
+                                  if (keyMode != " samplingModeInternal " ) {
            
                        text (  " lllllll ", -width/4, -height/4 ) ;           
                        
@@ -298,6 +299,7 @@ void  modePendulaireModeCirculaire() {
   
     sphere(side*3);
     sphereDetail( 4*5);
+     }
      }
      }
      }
@@ -442,6 +444,26 @@ void  modePendulaireModeCirculaire() {
       }  
 
     if ( modeStartKeyToFollow  == " followDistribueAddLfoPattern " ) {
+
+        text ( char (formerKeyMetro) , 100,100);
+      fill (127, 127 , 0);    
+      x = displacement*cos(newPosF[i]);
+      y = displacement*sin(newPosF[i]);   
+      sphere(side*3);
+      sphereDetail( 4*5); 
+      } 
+
+    if ( modeStartKeyToFollow  == " followDistribueAddLfoPattern " ) {
+
+        text ( char (formerKeyMetro) , 100,100);
+      fill (127, 127 , 0);    
+      x = displacement*cos(newPosF[i]);
+      y = displacement*sin(newPosF[i]);   
+      sphere(side*3);
+      sphereDetail( 4*5); 
+      } 
+
+    if ( keyMode  == " samplingModeInternal " ) {
 
         text ( char (formerKeyMetro) , 100,100);
       fill (127, 127 , 0);    

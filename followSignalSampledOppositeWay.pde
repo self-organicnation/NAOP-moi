@@ -64,7 +64,8 @@ if (formerDecayTime>decayTime){
   }
        
    else
-   phaseMapped[i] = phaseMappedFollow[i]+phaseMapped[i];
+ 
+    phaseMapped[i] = phaseMappedFollow[i]+phaseMapped[i];
     DataToDueCircularVirtualPosition[i]= (int) map (phaseMapped[i], 0, TWO_PI, 0, numberOfStep);
     net.oldPhase[i]=net.phase[i];
     net.phase[i]= map (DataToDueCircularVirtualPosition[i], 0, numberOfStep, 0, TWO_PI);

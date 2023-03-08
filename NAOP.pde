@@ -919,6 +919,8 @@ void draw() {
   print (char(formerSartKey));
   print (" formerKeyMetro ");  
   print (char(formerKeyMetro));
+   print (" overKeyMode ");  
+  print (overKeyMode);
   print (" keyMode ");  
   print (keyMode);
   print (" beatTrigged ");  
@@ -1271,10 +1273,10 @@ for (int i = 0; i < networkSize; i++) {
 
     case 'J':     
     modeStartKeyToFollow = " followSignalSampledOppositeWay(frameRatio) ";
-    formerKeyMetro = 'J';  // to enable the method to be trigged to the next pulsation
+   // formerKeyMetro = 'J';  // to enable the method to be trigged to the next pulsation
 
     text ( modeStartKeyToFollow, width/4, -height/4); 
-     keyMode = " modeStartKeyToFollow " ;
+   //  keyMode = " followSignalSampledOppositeWay " ;
      text ( keyMode, width/4, -height/4); 
     break;
 
@@ -1313,33 +1315,15 @@ for (int i = 0; i < networkSize; i++) {
   
   if (keyMode == " samplingMode "     ){ // || formerKeyMetro == 'J'
    println ( " IN SAMPLING ");   println ( " IN SAMPLING ");   println ( " IN SAMPLING ");
-    println ( " IN SAMPLING ");   println ( " IN SAMPLING ");   println ( " IN SAMPLING ");
-     println ( " IN SAMPLING ");   println ( " IN SAMPLING ");   println ( " IN SAMPLING ");
+
      beginSample=millis();
     text (keyMode + " samplingMode LFOdecay ", width/4, - height - 100);  
      
- //    mouseY=(int) map (automationLFO[1], 0, 1, 0, 400);  // position from Ableton LFOdecay
-
-
-
-/*
-      oldMov = movementRecording;
-      
-      movementRecording= mouseY;
-      
-           
-       if (oldMov>=  movementRecording){
-      
-    movementRecording= map (y, 0, 400, 0 , TWO_PI); 
-      }
-    else  
-    movementRecording= map (y, 400, 0, TWO_PI, 0);
-     
- */   
+ 
      
     
  
-    //****  mouseY=(int) map (automation1, 0, 1, 0, 400);  //POSITION MOTOR
+    //****  mouseY=(int) map (automation1, 0, 1, 0, 400);  //POSITION MOTOR wth serial.port
     
       //  mouseY = (int) map (signal[3], 0, 1, 0, 400);   // POSITION from ABLETON
     
@@ -1355,14 +1339,14 @@ for (int i = 0; i < networkSize; i++) {
          samplingMovementPro(); 
         
   //       print (" v1 ");   print (  v1);  print (" v1 ");   println (  v1); 
-         sendToTeensy();
+   //      sendToTeensy();
  }
  
      print( " INTERNAL CLOCK lastSec " ) ; print( lastSec ) ; print( " actual " ) ; print( actualSec ) ; print( " measure " ) ; println( measure ) ;
     
      if  (actualSec!=lastSec){
          lastSec=actualSec;
-      if (keyMode == " samplingModeInternal "     ){    
+     if (keyMode == " samplingModeInternal " ){    
           measure ++;
        }
       }  
@@ -1372,33 +1356,11 @@ for (int i = 0; i < networkSize; i++) {
   
   
    if (keyMode == " samplingModeInternal "     ){ // || formerKeyMetro == 'J'
-     println ( " samplingModeInternal  ");
-    println ( "samplingModeInternal ");  
-     println ( " samplingModeInternal ");   
      beginSample=millis();
      text ( keyMode + " mouseY " + measure , width/4, - height - 100);  
-   //      text ( measure + " mouseY ", width/4, -height-400);  
+  
      
  //    mouseY=(int) map (automationLFO[1], 0, 1, 0, 400);  // position from Ableton LFOdecay
-
-
-
-/*
-      oldMov = movementRecording;
-      
-      movementRecording= mouseY;
-      
-           
-       if (oldMov>=  movementRecording){
-      
-    movementRecording= map (y, 0, 400, 0 , TWO_PI); 
-      }
-    else  
-    movementRecording= map (y, 400, 0, TWO_PI, 0);
-     
- */   
-     
-    
  
     //****  mouseY=(int) map (automation1, 0, 1, 0, 400);  //POSITION MOTOR
     
@@ -1416,16 +1378,8 @@ for (int i = 0; i < networkSize; i++) {
          samplingMovementPro(); 
         
   //       print (" v1 ");   print (  v1);  print (" v1 ");   println (  v1); 
-         sendToTeensy();
+      //   sendToTeensy();
  }
- 
- 
- 
- 
- 
- 
- 
- 
  
  
  
@@ -1674,13 +1628,11 @@ for (int i = 0; i < networkSize; i++) {
    // pendularPatternNoJoe(); // without transformation of position's datas in the Arduino.
     
     rotate(PI/2);
-    printDataOnScreen();
+   //** printDataOnScreen();
     stroke(255);
     
-
+  // display current time with rectange depending elapsed time 2, 4 and 8 sec
     rect( (currTime % 2) / 2 * width, 10, 2, 8 );
-  
-//  println (currTime % 2);
     rect( (currTime % 4) / 4 * width, 20, 2, 8 );
     rect( (currTime % 8) / 8 * width, 30, 2, 8 );
     
