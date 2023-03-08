@@ -947,6 +947,8 @@ boolean[] moveKeys = new boolean[99];
   print (PApplet.parseChar(formerSartKey));
   print (" formerKeyMetro ");  
   print (PApplet.parseChar(formerKeyMetro));
+   print (" overKeyMode ");  
+  print (overKeyMode);
   print (" keyMode ");  
   print (keyMode);
   print (" beatTrigged ");  
@@ -1243,7 +1245,7 @@ for (int i = 0; i < networkSize; i++) {
   
   if (overKeyMode == " null ")
   {   
-   if ( key =='a'||  key =='b' ||  key =='c' ||  key =='d' || key =='e' || key =='f' || key =='s' || key =='z' || key =='J'  ) // 
+   if ( key =='a'||  key =='b' ||  key =='c' ||  key =='d' || key =='e' || key =='f' || key =='s' || key =='z' || key =='j'  ) // 
   {
     if (formerKeyCode == BACKSPACE) {
     modeStartKey = key;   // press l to change formerKeyMetro Mode
@@ -1297,12 +1299,13 @@ for (int i = 0; i < networkSize; i++) {
      text ( keyMode, width/4, -height/4); 
     break;
 
-    case 'J':     
+    case 'j':     
     modeStartKeyToFollow = " followSignalSampledOppositeWay(frameRatio) ";
-    formerKeyMetro = 'J';  // to enable the method to be trigged to the next pulsation
+   // formerKeyMetro = 'J';  // to enable the method to be trigged to the next pulsation
 
     text ( modeStartKeyToFollow, width/4, -height/4); 
-     keyMode = " modeStartKeyToFollow " ;
+  // //  keyMode = " followSignalSampledOppositeWay " ;
+   followSignalSampledOppositeWay(frameRatio);
      text ( keyMode, width/4, -height/4); 
     break;
 
@@ -1625,11 +1628,11 @@ for (int i = 0; i < networkSize; i++) {
   
   else trigRatio = false;
    
-  if (formerKeyMetro == 'J' ) { //drive ball with lfo ONCE //  && trigRatio == true
+  if (modeStartKeyToFollow == " followSignalSampledOppositeWay(frameRatio) " ) { //drive ball with lfo ONCE //  && trigRatio == true
   trigFollowSampling=true;
   }
   
-   if (formerKeyMetro != 'J' ) {
+   if (modeStartKeyToFollow == " followSignalSampledOppositeWay(frameRatio) " ) {
 //   if (formerKeyMetro == 's' ||  formerKeyMetro ==  '@' || formerKeyMetro ==  'B' ) { //you can't distribuate data to others balls  //formerKeyMetro == '*' || formerKeyMetro == '$' ||
   trigFollowSampling=false;
   }
@@ -3396,14 +3399,7 @@ private class MovingAverage {
   {
     filePlayer.pause();
   }       
-  if (key == 'J') { 
-    formerKeyMetro = key;
-    print ("KEY LFO MODE "); 
-    print ("FormerkeyMetro"); 
-    print (PApplet.parseChar(formerKeyMetro));
-    print ("key"); 
-    println (PApplet.parseChar(key));
-  }
+
 
 /*
   if (key == '<') { 
@@ -8579,10 +8575,10 @@ mapDataToMotor();
 }
 
  public void mapDataToMotor() {
-
+ println (" newPosXaddSignalAFTERDB " + newPosXaddSignal[0] + " newPosF[0] " + newPosF[0] + " net.phase[0] " + net.phase[0] );
      for (int i = 0; i <  networkSize-0; i+=1) { // la premiere celle du fond i=2,  la derniere celle du devant i=11
  //   drawBall(i, newPosXaddSignal[i] );
-  print (" newPosXaddSignalAFTERDB " + newPosXaddSignal[i]);
+ 
    
  //    print( " oldPositionToMotor[i]" ); print ( oldPositionToMotor[i]);
   //  positionToMotor[i]= ((int) map (newPosXaddSignal[i], 0, TWO_PI, 0, numberOfStep)%numberOfStep); //
@@ -12202,6 +12198,7 @@ if (formerDecayTime>decayTime){
 //followSignalSampledOppositeWay.pde
 
  public void followSignalSampledOppositeWay(int ratioTimeFrame){
+
   
 if (formerDecayTime>decayTime){
   frameCountBis=frameCountBis+1;
@@ -12220,7 +12217,7 @@ if (formerDecayTime>decayTime){
  //     phases[0][frameCountBis % nbMaxDelais]= net.phase[networkSize-1]-0;
 
  
-  println ( "  movementInterpolated ", movementInterpolated,
+  println ( "  movementInterpolated in FOLLOW opposite WAY", movementInterpolated,
              " oldmovementInterpolated ", oldMovementInterpolated );
     
    
@@ -12246,8 +12243,9 @@ if (formerDecayTime>decayTime){
  }
  
  
-  if (formerFormerKey == '#' || formerKeyMetro == 'J') {
+  if (formerFormerKey == '#' || modeStartKeyToFollow == " followSignalSampledOppositeWay(frameRatio) ") {
     
+println ( " modeStartKeyToFollow " + modeStartKeyToFollow);
 
       for (int i = 0; i < networkSize-0; i+=1) { 
         
@@ -12259,17 +12257,21 @@ if (formerDecayTime>decayTime){
     phaseMapped[i] = phaseMappedFollow[i]-phaseMapped[i];
  //   phaseMapped[i] = phaseMapped[i]%TWO_PI;
     DataToDueCircularVirtualPosition[i]= PApplet.parseInt (map (phaseMapped[i], 0, -TWO_PI, numberOfStep, 0)); 
-    net.oldPhase[i]=net.phase[i];
-    net.phase[i]= map (DataToDueCircularVirtualPosition[i], numberOfStep, 0, 0, -TWO_PI);
-    net.phase[i]= net.phase[i]%TWO_PI;
+ //   net.oldPhase[i]=net.phase[i];  // to trig note with ArduinoPos
+ //   net.phase[i]= map (DataToDueCircularVirtualPosition[i], numberOfStep, 0, 0, -TWO_PI);
+       phaseMapped[i]= map (DataToDueCircularVirtualPosition[i], numberOfStep, 0, 0, -TWO_PI);
+  //  net.phase[i]= net.phase[i]%TWO_PI;
   }
        
    else
-   phaseMapped[i] = phaseMappedFollow[i]+phaseMapped[i];
+ 
+    phaseMapped[i] = phaseMappedFollow[i]+phaseMapped[i];
     DataToDueCircularVirtualPosition[i]= (int) map (phaseMapped[i], 0, TWO_PI, 0, numberOfStep);
-    net.oldPhase[i]=net.phase[i];
-    net.phase[i]= map (DataToDueCircularVirtualPosition[i], 0, numberOfStep, 0, TWO_PI);
-    net.phase[i]= net.phase[i]%TWO_PI;
+   // net.oldPhase[i]=net.phase[i];
+   // net.phase[i]= map (DataToDueCircularVirtualPosition[i], 0, numberOfStep, 0, TWO_PI);
+   // net.phase[i]= net.phase[i]%TWO_PI;
+    phaseMapped[i]= map (DataToDueCircularVirtualPosition[i], numberOfStep, 0, 0, -TWO_PI);
+
   }
   
  
@@ -12278,7 +12280,7 @@ if (formerDecayTime>decayTime){
   
    
     if (formerFormerKey != '#' ) {
-    if (formerKeyMetro == 'J' ) {
+    if (modeStartKeyToFollow == " followSignalSampledOppositeWay(frameRatio) ") {
      phasePattern();
      
     for (int i = 0; i < networkSize-0; i+=1) { 
@@ -12291,26 +12293,25 @@ if (formerDecayTime>decayTime){
     if (phaseMapped[i]<0){
    
      DataToDueCircularVirtualPosition[i]= PApplet.parseInt (map (phaseMapped[i], 0, -TWO_PI, numberOfStep, 0)); 
-   //  net.oldPhase[i]=phaseMapped[i];
-    net.oldPhase[i]= net.phase[i];
-    net.phase[i]= map (DataToDueCircularVirtualPosition[i], numberOfStep, 0, 0, -TWO_PI);
-    net.phase[i]= phaseMapped[i];
+  
+  //  net.oldPhase[i]= net.phase[i];
+  //  net.phase[i]= map (DataToDueCircularVirtualPosition[i], numberOfStep, 0, 0, -TWO_PI);
+  //  net.phase[i]= phaseMapped[i];
+     phaseMapped[i]=map (DataToDueCircularVirtualPosition[i], numberOfStep, 0, 0, -TWO_PI);
        }
        
    else
     
     DataToDueCircularVirtualPosition[i]= (int) map (phaseMapped[i], 0, TWO_PI, 0, numberOfStep); 
-    net.oldPhase[i]=net.phase[i];
-    net.phase[i]= phaseMapped[i];
-       net.phase[i]= map (DataToDueCircularVirtualPosition[i], 0, numberOfStep, 0, TWO_PI);
+    // net.oldPhase[i]=net.phase[i];
+    // net.phase[i]= phaseMapped[i];
+    // net.phase[i]= map (DataToDueCircularVirtualPosition[i], 0, numberOfStep, 0, TWO_PI);
+       phaseMapped[i]= map (DataToDueCircularVirtualPosition[i], 0, numberOfStep, 0, TWO_PI);
 
 
     }
    }
   }
- 
- 
- 
    if (keyCode == BACKSPACE ) {
     
       for (int i = 0; i < networkSize-0; i+=1) { 
@@ -12324,18 +12325,22 @@ if (formerDecayTime>decayTime){
     if (phaseMapped[i]<0){
    
     DataToDueCircularVirtualPosition[i]= PApplet.parseInt (map (phaseMapped[i], 0, -TWO_PI, numberOfStep, 0)); 
-      net.oldPhase[i]=phaseMapped[i];
-     net.phase[i]= phaseMapped[i];
+   //   net.oldPhase[i]=phaseMapped[i];
+   //  net.phase[i]= phaseMapped[i];
+   phaseMapped[i]=DataToDueCircularVirtualPosition[i];
        }
         
    else
     
     DataToDueCircularVirtualPosition[i]= (int) map (phaseMapped[i], 0, TWO_PI, 0, numberOfStep);
-   net.oldPhase[i]=phaseMapped[i];
-    net.phase[i]= phaseMapped[i];
+  // net.oldPhase[i]=phaseMapped[i];
+  //  net.phase[i]= phaseMapped[i];
+   phaseMapped[i]=DataToDueCircularVirtualPosition[i];
   }
  }
- 
+ for (int i = 0; i < networkSize-0; i+=1) { 
+  newPosF[i]=phaseMapped[i]; // display data and use them to control motor
+  }
  
   //sendToTeensyTurnOnDriver();
   mapDataToMotor();
@@ -15276,7 +15281,7 @@ float[] volumei;
       x = displacement*cos(net.phase[i]);
       y = displacement*sin(net.phase[i]);
     }
-
+/*
     if (formerKeyMetro == 'J') { //USELLL play sample recorded with s
      text ( " mapped to J CIRCULAR or PENDULAR way 2$ ", 400, 1000);
 
@@ -15284,6 +15289,7 @@ float[] volumei;
       y = displacement*sin(net.phase[i]);
   
     }
+*/    
     if (formerKeyMetro == 's') { //drive ball with lfo
          text ( " mapped to s CIRCULAR or PENDULAR way 2$ ", 400, 1100);
 

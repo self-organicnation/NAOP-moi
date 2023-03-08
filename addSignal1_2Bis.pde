@@ -178,10 +178,10 @@ void  splitTimeLfoBis() {  // signalToSplit = lfoPhase3
 }
 
 void mapDataToMotor() {
-
+ println (" newPosXaddSignalAFTERDB " + newPosXaddSignal[0] + " newPosF[0] " + newPosF[0] + " net.phase[0] " + net.phase[0] );
      for (int i = 0; i <  networkSize-0; i+=1) { // la premiere celle du fond i=2,  la derniere celle du devant i=11
  //   drawBall(i, newPosXaddSignal[i] );
-  print (" newPosXaddSignalAFTERDB " + newPosXaddSignal[i]);
+ 
    
  //    print( " oldPositionToMotor[i]" ); print ( oldPositionToMotor[i]);
   //  positionToMotor[i]= ((int) map (newPosXaddSignal[i], 0, TWO_PI, 0, numberOfStep)%numberOfStep); //

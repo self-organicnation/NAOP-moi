@@ -215,7 +215,7 @@ void  modePendulaireModeCirculaire() {
       x = displacement*cos(net.phase[i]);
       y = displacement*sin(net.phase[i]);
     }
-
+/*
     if (formerKeyMetro == 'J') { //USELLL play sample recorded with s
      text ( " mapped to J CIRCULAR or PENDULAR way 2$ ", 400, 1000);
 
@@ -223,6 +223,7 @@ void  modePendulaireModeCirculaire() {
       y = displacement*sin(net.phase[i]);
   
     }
+*/    
     if (formerKeyMetro == 's') { //drive ball with lfo
          text ( " mapped to s CIRCULAR or PENDULAR way 2$ ", 400, 1100);
 

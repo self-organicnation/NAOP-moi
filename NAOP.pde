@@ -1217,7 +1217,7 @@ for (int i = 0; i < networkSize; i++) {
   
   if (overKeyMode == " null ")
   {   
-   if ( key =='a'||  key =='b' ||  key =='c' ||  key =='d' || key =='e' || key =='f' || key =='s' || key =='z' || key =='J'  ) // 
+   if ( key =='a'||  key =='b' ||  key =='c' ||  key =='d' || key =='e' || key =='f' || key =='s' || key =='z' || key =='j'  ) // 
   {
     if (formerKeyCode == BACKSPACE) {
     modeStartKey = key;   // press l to change formerKeyMetro Mode
@@ -1271,12 +1271,13 @@ for (int i = 0; i < networkSize; i++) {
      text ( keyMode, width/4, -height/4); 
     break;
 
-    case 'J':     
+    case 'j':     
     modeStartKeyToFollow = " followSignalSampledOppositeWay(frameRatio) ";
    // formerKeyMetro = 'J';  // to enable the method to be trigged to the next pulsation
 
     text ( modeStartKeyToFollow, width/4, -height/4); 
-   //  keyMode = " followSignalSampledOppositeWay " ;
+  // //  keyMode = " followSignalSampledOppositeWay " ;
+   followSignalSampledOppositeWay(frameRatio);
      text ( keyMode, width/4, -height/4); 
     break;
 
@@ -1599,11 +1600,11 @@ for (int i = 0; i < networkSize; i++) {
   
   else trigRatio = false;
    
-  if (formerKeyMetro == 'J' ) { //drive ball with lfo ONCE //  && trigRatio == true
+  if (modeStartKeyToFollow == " followSignalSampledOppositeWay(frameRatio) " ) { //drive ball with lfo ONCE //  && trigRatio == true
   trigFollowSampling=true;
   }
   
-   if (formerKeyMetro != 'J' ) {
+   if (modeStartKeyToFollow == " followSignalSampledOppositeWay(frameRatio) " ) {
 //   if (formerKeyMetro == 's' ||  formerKeyMetro ==  '@' || formerKeyMetro ==  'B' ) { //you can't distribuate data to others balls  //formerKeyMetro == '*' || formerKeyMetro == '$' ||
   trigFollowSampling=false;
   }
@@ -3370,14 +3371,7 @@ void keyReleased() {
   {
     filePlayer.pause();
   }       
-  if (key == 'J') { 
-    formerKeyMetro = key;
-    print ("KEY LFO MODE "); 
-    print ("FormerkeyMetro"); 
-    print (char(formerKeyMetro));
-    print ("key"); 
-    println (char(key));
-  }
+
 
 /*
   if (key == '<') { 

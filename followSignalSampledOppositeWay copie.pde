@@ -1,7 +1,6 @@
 //followSignalSampledOppositeWay.pde
 
 void followSignalSampledOppositeWay(int ratioTimeFrame){
-
   
 if (formerDecayTime>decayTime){
   frameCountBis=frameCountBis+1;
@@ -20,7 +19,7 @@ if (formerDecayTime>decayTime){
  //     phases[0][frameCountBis % nbMaxDelais]= net.phase[networkSize-1]-0;
 
  
-  println ( "  movementInterpolated in FOLLOW opposite WAY", movementInterpolated,
+  println ( "  movementInterpolated ", movementInterpolated,
              " oldmovementInterpolated ", oldMovementInterpolated );
     
    
@@ -46,9 +45,8 @@ if (formerDecayTime>decayTime){
  }
  
  
-  if (formerFormerKey == '#' || modeStartKeyToFollow == " followSignalSampledOppositeWay(frameRatio) ") {
+  if (formerFormerKey == '#' || formerKeyMetro == 'J') {
     
-println ( " modeStartKeyToFollow " + modeStartKeyToFollow);
 
       for (int i = 0; i < networkSize-0; i+=1) { 
         
@@ -60,21 +58,18 @@ println ( " modeStartKeyToFollow " + modeStartKeyToFollow);
     phaseMapped[i] = phaseMappedFollow[i]-phaseMapped[i];
  //   phaseMapped[i] = phaseMapped[i]%TWO_PI;
     DataToDueCircularVirtualPosition[i]= int (map (phaseMapped[i], 0, -TWO_PI, numberOfStep, 0)); 
- //   net.oldPhase[i]=net.phase[i];  // to trig note with ArduinoPos
- //   net.phase[i]= map (DataToDueCircularVirtualPosition[i], numberOfStep, 0, 0, -TWO_PI);
-       phaseMapped[i]= map (DataToDueCircularVirtualPosition[i], numberOfStep, 0, 0, -TWO_PI);
-  //  net.phase[i]= net.phase[i]%TWO_PI;
+    net.oldPhase[i]=net.phase[i];
+    net.phase[i]= map (DataToDueCircularVirtualPosition[i], numberOfStep, 0, 0, -TWO_PI);
+    net.phase[i]= net.phase[i]%TWO_PI;
   }
        
    else
  
     phaseMapped[i] = phaseMappedFollow[i]+phaseMapped[i];
     DataToDueCircularVirtualPosition[i]= (int) map (phaseMapped[i], 0, TWO_PI, 0, numberOfStep);
-   // net.oldPhase[i]=net.phase[i];
-   // net.phase[i]= map (DataToDueCircularVirtualPosition[i], 0, numberOfStep, 0, TWO_PI);
-   // net.phase[i]= net.phase[i]%TWO_PI;
-    phaseMapped[i]= map (DataToDueCircularVirtualPosition[i], numberOfStep, 0, 0, -TWO_PI);
-
+    net.oldPhase[i]=net.phase[i];
+    net.phase[i]= map (DataToDueCircularVirtualPosition[i], 0, numberOfStep, 0, TWO_PI);
+    net.phase[i]= net.phase[i]%TWO_PI;
   }
   
  
@@ -83,7 +78,7 @@ println ( " modeStartKeyToFollow " + modeStartKeyToFollow);
   
    
     if (formerFormerKey != '#' ) {
-    if (modeStartKeyToFollow == " followSignalSampledOppositeWay(frameRatio) ") {
+    if (formerKeyMetro == 'J' ) {
      phasePattern();
      
     for (int i = 0; i < networkSize-0; i+=1) { 
@@ -96,25 +91,26 @@ println ( " modeStartKeyToFollow " + modeStartKeyToFollow);
     if (phaseMapped[i]<0){
    
      DataToDueCircularVirtualPosition[i]= int (map (phaseMapped[i], 0, -TWO_PI, numberOfStep, 0)); 
-  
-  //  net.oldPhase[i]= net.phase[i];
-  //  net.phase[i]= map (DataToDueCircularVirtualPosition[i], numberOfStep, 0, 0, -TWO_PI);
-  //  net.phase[i]= phaseMapped[i];
-     phaseMapped[i]=map (DataToDueCircularVirtualPosition[i], numberOfStep, 0, 0, -TWO_PI);
+   //  net.oldPhase[i]=phaseMapped[i];
+    net.oldPhase[i]= net.phase[i];
+    net.phase[i]= map (DataToDueCircularVirtualPosition[i], numberOfStep, 0, 0, -TWO_PI);
+    net.phase[i]= phaseMapped[i];
        }
        
    else
     
     DataToDueCircularVirtualPosition[i]= (int) map (phaseMapped[i], 0, TWO_PI, 0, numberOfStep); 
-    // net.oldPhase[i]=net.phase[i];
-    // net.phase[i]= phaseMapped[i];
-    // net.phase[i]= map (DataToDueCircularVirtualPosition[i], 0, numberOfStep, 0, TWO_PI);
-       phaseMapped[i]= map (DataToDueCircularVirtualPosition[i], 0, numberOfStep, 0, TWO_PI);
+    net.oldPhase[i]=net.phase[i];
+    net.phase[i]= phaseMapped[i];
+       net.phase[i]= map (DataToDueCircularVirtualPosition[i], 0, numberOfStep, 0, TWO_PI);
 
 
     }
    }
   }
+ 
+ 
+ 
    if (keyCode == BACKSPACE ) {
     
       for (int i = 0; i < networkSize-0; i+=1) { 
@@ -128,22 +124,18 @@ println ( " modeStartKeyToFollow " + modeStartKeyToFollow);
     if (phaseMapped[i]<0){
    
     DataToDueCircularVirtualPosition[i]= int (map (phaseMapped[i], 0, -TWO_PI, numberOfStep, 0)); 
-   //   net.oldPhase[i]=phaseMapped[i];
-   //  net.phase[i]= phaseMapped[i];
-   phaseMapped[i]=DataToDueCircularVirtualPosition[i];
+      net.oldPhase[i]=phaseMapped[i];
+     net.phase[i]= phaseMapped[i];
        }
         
    else
     
     DataToDueCircularVirtualPosition[i]= (int) map (phaseMapped[i], 0, TWO_PI, 0, numberOfStep);
-  // net.oldPhase[i]=phaseMapped[i];
-  //  net.phase[i]= phaseMapped[i];
-   phaseMapped[i]=DataToDueCircularVirtualPosition[i];
+   net.oldPhase[i]=phaseMapped[i];
+    net.phase[i]= phaseMapped[i];
   }
  }
- for (int i = 0; i < networkSize-0; i+=1) { 
-  newPosF[i]=phaseMapped[i]; // display data and use them to control motor
-  }
+ 
  
   //sendToTeensyTurnOnDriver();
   mapDataToMotor();
