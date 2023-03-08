@@ -33,7 +33,7 @@ void  modePendulaireModeCirculaire() {
 
 
     if (formerKeyMetro == '$' && (formerSartKey == 'X' || formerSartKey == 'x' ) ) {  // circular to pendular) //|| formerSartKey == 'w' || formerSartKey == 'W'
-    if (overKeyMode != " null ")  {  
+    if (overKeyMode != " truc ")  {  
   text ( " mapped SECOND pendular way $ ", 400, 700);
      
 
@@ -117,7 +117,7 @@ void  modePendulaireModeCirculaire() {
    }
 
     if ((formerKeyMetro == '$' || formerKeyMetro == '*' || formerKeyMetro == '@'  ) && (formerSartKey == 'w' || formerSartKey == 'W' ) ) {  // circular to pendular) //|| formerSartKey == 'w' || formerSartKey == 'W'
-    if (overKeyMode != " null " ) {   
+    if (overKeyMode != " truc " ) {   
     
      text ( " mapped to THIRD pendular way 2$ ", 400, 800);
       if (net.phase[i] <= 0 && net.phase[i] >= -PI ) {   
@@ -286,6 +286,7 @@ void  modePendulaireModeCirculaire() {
      if (formerKeyMetro !='B' ) { //drive ball with lfo
           if (formerKeyMetro != '<' ) {
              if (formerKeyMetro != '@' ) {
+                 if (formerKeyMetro != '*' ) {
                      if (keyMode != " addSignalOneAndTwo " ) {
                          if (keyMode != " addSignalOneAndTwoBis " ) {
                              if (keyMode != " addSignalOneAndTwoTer " ) {
@@ -300,6 +301,7 @@ void  modePendulaireModeCirculaire() {
   
     sphere(side*3);
     sphereDetail( 4*5);
+    }
      }
      }
      }
@@ -380,7 +382,7 @@ void  modePendulaireModeCirculaire() {
       sphereDetail( 4*5);
       }
     
- if ( overKeyMode == " null " ) {      
+ if ( overKeyMode == " notNull " ) {      
     if ( keyMode == " methodAbleton " ) { //drive ball with lfo   
   
     println ( "****************************** DISPLAY ", keyMode );   
