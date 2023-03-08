@@ -110,7 +110,7 @@ int [] recordLastDataOfMotorPosition = new int[networkSize];  // not used
 
 
 int frameCountRed;
-String keyModeRed;
+String overKeyMode,keyMode,keyModeRed;  // to read and change mode of pattern arrangement
 String mappingMode; 
 int   controlTrigLfoPattern;
 float phaseShiftingFollowLFO;
@@ -844,8 +844,8 @@ int framecount=30040;//4440 //5040  0à°)-_
       
   }
 //keyMode = " addSignalOneAndTwoBis ";  
-keyMode = " phasePattern ";                                                                                                                                                                                                                 
-formerKeyMetro = '@';
+keyMode = " samplingModeInternal ";                                                                                                                                                                                                                 
+formerKeyMetro = '*';
  
 }
 // END SETUP
@@ -872,7 +872,7 @@ float Automation1[] = new float[numFrame];
 int formerAuto;
 
 
-String keyMode;
+
 boolean[] moveKeys = new boolean[99];
 
  public void setMovement(int k, boolean b) {//azeqsdwxcrty
@@ -1020,7 +1020,7 @@ boolean[] moveKeys = new boolean[99];
     }
     
     if (moveKeys[8]==true && moveKeys[7]==true){ // ALT && x pressed
-    keyMode = " null " ;
+    overKeyMode = " null " ;
     
    //formerKeyMetro = '*';
     print (" keyMode ",  keyMode, " formerKeyMetro ", formerKeyMetro );
@@ -1086,7 +1086,7 @@ boolean[] moveKeys = new boolean[99];
         println (" modeStartKeyToFollow ", modeStartKeyToFollow, " keyModeRed",  keyModeRed,"keyMode",  keyMode, "formerKeyMetro ", formerKeyMetro, " controlTrigLfoPattern ", controlTrigLfoPattern );
     keyModeRed = keyMode; // dont read keyMode in file.txt
 
-      if (keyMode == " addSignalOneAndTwoQuater " || keyModeRed == " addSignalOneAndQuater " ) { //drive ball with lfo
+    if (keyMode == " addSignalOneAndTwoQuater " || keyModeRed == " addSignalOneAndQuater " ) { //drive ball with lfo
     //   PatternFollowLfo();
      propagationMode();
       text ( keyMode, -width, -height); 
@@ -1132,7 +1132,7 @@ boolean[] moveKeys = new boolean[99];
       text ( keyMode, -width, -height); 
   }
   
-    if (keyMode == " samplingMode " || keyModeRed == " samplingMode ") { //drive ball with lfo
+  if (keyMode == " samplingMode " || keyModeRed == " samplingMode ") { //drive ball with lfo
   //   followDistribueAddLfoPattern();
      text ( keyMode, -width, -height);
   }
@@ -1146,13 +1146,13 @@ boolean[] moveKeys = new boolean[99];
      followDistribueAddLfoPatternControl();
   }
   
-  if (keyMode == " null " || keyModeRed == " null ") { //drive ball with lfo
+  if (overKeyMode == " null " ) { //|| keyModeRed == " null "
     //  followDistribueAddLfoPattern();
-      text (keyMode, (width/2), height/2);  
+      text (overKeyMode, (width/2), height/2);  
 
   }
   
-   if (keyMode == " phasePattern " ) { //drive ball with lfo
+   if (keyMode == " phasePattern " ) { 
     //  followDistribueAddLfoPattern();
     // phasePattern();
       text (keyMode, (width/2), height/2); 
@@ -1160,7 +1160,7 @@ boolean[] moveKeys = new boolean[99];
 
   }
   
-     if (keyMode == " abletonPattern " ) { //drive ball with lfo
+  if (keyMode == " abletonPattern " ) { //drive ball with lfo
     //  followDistribueAddLfoPattern();
       abletonPattern();
       text (keyMode, (width/2), height/2);  
@@ -1241,7 +1241,7 @@ for (int i = 0; i < networkSize; i++) {
    }
   }
   
-  if (keyMode == " null ")
+  if (overKeyMode == " null ")
   {   
    if ( key =='a'||  key =='b' ||  key =='c' ||  key =='d' || key =='e' || key =='f' || key =='s' || key =='z' || key =='J'  ) // 
   {
@@ -1809,7 +1809,7 @@ for (int i = 0; i < networkSize; i++) {
        
    //**********************************************************************    
    // STARTERCASE with formerKey
- if ( keyMode != " null "  ) {  
+ if ( overKeyMode != " null "  ) {  
     if ( keyMode == " phasePattern "  ) { 
  //       pendularPatternLFO();
       text ( " phase offset " + k + " delay " + d, - width-400, - height+400);
@@ -2439,7 +2439,7 @@ for (int i = 0; i < networkSize; i++) {
      }
     } 
     
-       if (  keyMode == " null " ) {
+       if (  overKeyMode == " null " ) {
      for (int i = 0; i < networkSize; i++) {  
         //    net.phase[i] = newPosF[i];
         //   net.phase[i] = newPosXaddSignal[i];
@@ -2649,7 +2649,7 @@ for (int i = 0; i < networkSize; i++) {
   }
     //*********** COMPUTE ACCELERATION
   
-           if (  keyMode == " null " || keyMode == " addSignalOneAndTwo " ) {
+           if (  overKeyMode == " null " || keyMode == " addSignalOneAndTwo " ) {
      for (int i = 0; i < networkSize; i++) {  
        //     net.phase[i] = newPosF[i];  // to compute acceelration
       //**     net.phase[i] = newPosXaddSignal[i];
@@ -3245,7 +3245,7 @@ private class MovingAverage {
     recordBis();
     formerFrame= frameCount;
   }
- if ( keyMode == " null " ) {
+ if ( overKeyMode == " null " ) {
   
      text (" delayTimeFollowPhase11  ",  200,-1200);
      text ( delayTimeFollowPhase11  ,  200,-1100);
@@ -3343,7 +3343,7 @@ private class MovingAverage {
  
  
 
-  if (formerKeyMetro == 'J' || keyMode == " null ")  {
+  if (formerKeyMetro == 'J' || overKeyMode == " null ")  {
     
   
     if (keyCode == LEFT) {
@@ -15144,7 +15144,7 @@ float[] volumei;
 
 
     if (formerKeyMetro == '$' && (formerSartKey == 'X' || formerSartKey == 'x' ) ) {  // circular to pendular) //|| formerSartKey == 'w' || formerSartKey == 'W'
-    if (keyMode != " null ")  {  
+    if (overKeyMode != " null ")  {  
   text ( " mapped SECOND pendular way $ ", 400, 700);
      
 
@@ -15228,7 +15228,7 @@ float[] volumei;
    }
 
     if ((formerKeyMetro == '$' || formerKeyMetro == '*' || formerKeyMetro == '@'  ) && (formerSartKey == 'w' || formerSartKey == 'W' ) ) {  // circular to pendular) //|| formerSartKey == 'w' || formerSartKey == 'W'
-    if (keyMode != " null " ) {   
+    if (overKeyMode != " null " ) {   
     
      text ( " mapped to THIRD pendular way 2$ ", 400, 800);
       if (net.phase[i] <= 0 && net.phase[i] >= -PI ) {   
@@ -15488,7 +15488,7 @@ float[] volumei;
       sphereDetail( 4*5);
       }
     
- if ( keyMode == " null " ) {      
+ if ( overKeyMode == " null " ) {      
     if ( keyMode == " methodAbleton " ) { //drive ball with lfo   
   
     println ( "****************************** DISPLAY ", keyMode );   
