@@ -82,7 +82,7 @@ int [] recordLastDataOfMotorPosition = new int[networkSize];  // not used
 
 
 int frameCountRed;
-String overKeyMode,keyMode,keyModeRed;  // to read and change mode of pattern arrangement
+String keyModeRed;
 String mappingMode; 
 int   controlTrigLfoPattern;
 float phaseShiftingFollowLFO;
@@ -816,8 +816,8 @@ void setup() {
       
   }
 //keyMode = " addSignalOneAndTwoBis ";  
-keyMode = " samplingModeInternal ";                                                                                                                                                                                                                 
-formerKeyMetro = '*';
+keyMode = " phasePattern ";                                                                                                                                                                                                                 
+formerKeyMetro = '@';
  
 }
 // END SETUP
@@ -844,7 +844,7 @@ float Automation1[] = new float[numFrame];
 int formerAuto;
 
 
-
+String keyMode;
 boolean[] moveKeys = new boolean[99];
 
 void setMovement(int k, boolean b) {//azeqsdwxcrty
@@ -992,7 +992,7 @@ void draw() {
     }
     
     if (moveKeys[8]==true && moveKeys[7]==true){ // ALT && x pressed
-    overKeyMode = " null " ;
+    keyMode = " null " ;
     
    //formerKeyMetro = '*';
     print (" keyMode ",  keyMode, " formerKeyMetro ", formerKeyMetro );
@@ -1058,7 +1058,7 @@ void draw() {
         println (" modeStartKeyToFollow ", modeStartKeyToFollow, " keyModeRed",  keyModeRed,"keyMode",  keyMode, "formerKeyMetro ", formerKeyMetro, " controlTrigLfoPattern ", controlTrigLfoPattern );
     keyModeRed = keyMode; // dont read keyMode in file.txt
 
-    if (keyMode == " addSignalOneAndTwoQuater " || keyModeRed == " addSignalOneAndQuater " ) { //drive ball with lfo
+      if (keyMode == " addSignalOneAndTwoQuater " || keyModeRed == " addSignalOneAndQuater " ) { //drive ball with lfo
     //   PatternFollowLfo();
      propagationMode();
       text ( keyMode, -width, -height); 
@@ -1104,7 +1104,7 @@ void draw() {
       text ( keyMode, -width, -height); 
   }
   
-  if (keyMode == " samplingMode " || keyModeRed == " samplingMode ") { //drive ball with lfo
+    if (keyMode == " samplingMode " || keyModeRed == " samplingMode ") { //drive ball with lfo
   //   followDistribueAddLfoPattern();
      text ( keyMode, -width, -height);
   }
@@ -1118,13 +1118,13 @@ void draw() {
      followDistribueAddLfoPatternControl();
   }
   
-  if (overKeyMode == " null " ) { //|| keyModeRed == " null "
+  if (keyMode == " null " || keyModeRed == " null ") { //drive ball with lfo
     //  followDistribueAddLfoPattern();
-      text (overKeyMode, (width/2), height/2);  
+      text (keyMode, (width/2), height/2);  
 
   }
   
-   if (keyMode == " phasePattern " ) { 
+   if (keyMode == " phasePattern " ) { //drive ball with lfo
     //  followDistribueAddLfoPattern();
     // phasePattern();
       text (keyMode, (width/2), height/2); 
@@ -1132,7 +1132,7 @@ void draw() {
 
   }
   
-  if (keyMode == " abletonPattern " ) { //drive ball with lfo
+     if (keyMode == " abletonPattern " ) { //drive ball with lfo
     //  followDistribueAddLfoPattern();
       abletonPattern();
       text (keyMode, (width/2), height/2);  
@@ -1213,7 +1213,7 @@ for (int i = 0; i < networkSize; i++) {
    }
   }
   
-  if (overKeyMode == " null ")
+  if (keyMode == " null ")
   {   
    if ( key =='a'||  key =='b' ||  key =='c' ||  key =='d' || key =='e' || key =='f' || key =='s' || key =='z' || key =='J'  ) // 
   {
@@ -1781,7 +1781,7 @@ for (int i = 0; i < networkSize; i++) {
        
    //**********************************************************************    
    // STARTERCASE with formerKey
- if ( overKeyMode != " null "  ) {  
+ if ( keyMode != " null "  ) {  
     if ( keyMode == " phasePattern "  ) { 
  //       pendularPatternLFO();
       text ( " phase offset " + k + " delay " + d, - width-400, - height+400);
@@ -2411,7 +2411,7 @@ void arduinoPos() {
      }
     } 
     
-       if (  overKeyMode == " null " ) {
+       if (  keyMode == " null " ) {
      for (int i = 0; i < networkSize; i++) {  
         //    net.phase[i] = newPosF[i];
         //   net.phase[i] = newPosXaddSignal[i];
@@ -2621,7 +2621,7 @@ void arduinoPos() {
   }
     //*********** COMPUTE ACCELERATION
   
-           if (  overKeyMode == " null " || keyMode == " addSignalOneAndTwo " ) {
+           if (  keyMode == " null " || keyMode == " addSignalOneAndTwo " ) {
      for (int i = 0; i < networkSize; i++) {  
        //     net.phase[i] = newPosF[i];  // to compute acceelration
       //**     net.phase[i] = newPosXaddSignal[i];
@@ -3217,7 +3217,7 @@ void recordFrame() {
     recordBis();
     formerFrame= frameCount;
   }
- if ( overKeyMode == " null " ) {
+ if ( keyMode == " null " ) {
   
      text (" delayTimeFollowPhase11  ",  200,-1200);
      text ( delayTimeFollowPhase11  ,  200,-1100);
@@ -3315,7 +3315,7 @@ void keyReleased() {
  
  
 
-  if (formerKeyMetro == 'J' || overKeyMode == " null ")  {
+  if (formerKeyMetro == 'J' || keyMode == " null ")  {
     
   
     if (keyCode == LEFT) {

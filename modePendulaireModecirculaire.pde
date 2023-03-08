@@ -33,7 +33,7 @@ void  modePendulaireModeCirculaire() {
 
 
     if (formerKeyMetro == '$' && (formerSartKey == 'X' || formerSartKey == 'x' ) ) {  // circular to pendular) //|| formerSartKey == 'w' || formerSartKey == 'W'
-    if (overKeyMode != " null ")  {  
+    if (keyMode != " null ")  {  
   text ( " mapped SECOND pendular way $ ", 400, 700);
      
 
@@ -117,7 +117,7 @@ void  modePendulaireModeCirculaire() {
    }
 
     if ((formerKeyMetro == '$' || formerKeyMetro == '*' || formerKeyMetro == '@'  ) && (formerSartKey == 'w' || formerSartKey == 'W' ) ) {  // circular to pendular) //|| formerSartKey == 'w' || formerSartKey == 'W'
-    if (overKeyMode != " null " ) {   
+    if (keyMode != " null " ) {   
     
      text ( " mapped to THIRD pendular way 2$ ", 400, 800);
       if (net.phase[i] <= 0 && net.phase[i] >= -PI ) {   
@@ -377,7 +377,7 @@ void  modePendulaireModeCirculaire() {
       sphereDetail( 4*5);
       }
     
- if ( overKeyMode == " null " ) {      
+ if ( keyMode == " null " ) {      
     if ( keyMode == " methodAbleton " ) { //drive ball with lfo   
   
     println ( "****************************** DISPLAY ", keyMode );   
