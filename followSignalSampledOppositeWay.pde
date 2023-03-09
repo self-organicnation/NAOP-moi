@@ -1,6 +1,8 @@
 //followSignalSampledOppositeWay.pde
 
 void followSignalSampledOppositeWay(int ratioTimeFrame){
+
+ 
   
 if (formerDecayTime>decayTime){
   frameCountBis=frameCountBis+1;
@@ -11,7 +13,7 @@ if (formerDecayTime>decayTime){
   int delayRatio=ratioTimeFrame;
 
      //samplingMovement(2);
-      samplingMovementPro();
+     samplingMovementPro();
   //    keyReleasedfollowSignal(); useless  phseShifting is controlled in keyRelesead
       float deltaFollow = TWO_PI; // not used
      //here in a previous function we could change the ball followed if the space of phase between phases[0] and phase 9 is more than 360° for example
@@ -24,11 +26,14 @@ if (formerDecayTime>decayTime){
     
    
      phases[0][frameCountBis % nbMaxDelais]=movementInterpolated;
+   //phases[0][frameCountBis % nbMaxDelais]=net.phase[networkSize-1];
      println ( " net.phase[networkSize-1] ",  net.phase[networkSize-1] , " movementInterpolated " , movementInterpolated );
   //    drawBallOppositeWay(0, phases[0][frameCountBis % nbMaxDelais]); //networkSize-5 affiche le point 0. NE PAS AFFICHER SINON IL APPARAIT EN DOUBLE
 
    
     for (int i = 1; i < networkSize; i+=1) { // 1 follow phase 0
+
+  //   println (" followSignalSampledOppositeWay ");
    
     
     //   follow( i-1, i, 20 * i, 0);  // Modifier les deux derniers paramètres : délais et phase
@@ -36,6 +41,8 @@ if (formerDecayTime>decayTime){
 
  //     drawBall(i, phaseMapped[i] );
     drawBallOppositeWay( i, phases[i+0][frameCountBis % nbMaxDelais] );
+
+    net.phase[i+0]=phases[i+0][frameCountBis % nbMaxDelais];
     
 
 
@@ -44,7 +51,7 @@ if (formerDecayTime>decayTime){
    // drawBallOppositeWay(  i, phases[i+0][frameCountBis % nbMaxDelais] );  
  }
  
- 
+ /*
   if (formerFormerKey == '#' || formerKeyMetro == 'J') {
     
 
@@ -134,8 +141,13 @@ if (formerDecayTime>decayTime){
     net.phase[i]= phaseMapped[i];
   }
  }
- 
+ for (int i = 0; i < networkSize-0; i+=1) { 
+// println ( " net.phase[i  " +  net.phase[i]);
+  net.phase[i]= phaseMapped[i];
+  println ( "  follow signalSampledoppositeway net.phase[i  " +  net.phase[i]);
+  }
  
   //sendToTeensyTurnOnDriver();
   mapDataToMotor();
+  */
 }
